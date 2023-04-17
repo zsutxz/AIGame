@@ -1,0 +1,11 @@
+*.meta
+Library/*
+Temp/*
+ProjectSettings/*
+Assembly-CSharp-Editor.csproj
+Packages/*
+UserSettings/*
+Logs/*
+obj/*
+.vscode/*
+AIGane.sln
