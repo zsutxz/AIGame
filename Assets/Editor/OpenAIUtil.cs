@@ -3,11 +3,16 @@ using UnityEditor;
 using UnityEngine.Networking;
 using System.Text;
 
-namespace AICommand
+namespace OpenAI
 {
-
     static class OpenAIUtil
     {
+        public static bool IsApiKeyOk  => !string.IsNullOrEmpty(AISettings.instance.apiKey);
+
+        public const string ApiKeyErrorText =
+          "API Key hasn't been set. Please check the project settings " +
+          "(Edit > Project Settings > AI Setting> API Key).";
+
         static string CreateChatRequestBody(string prompt)
         {
             var msg = new OpenAI.RequestMessage();
@@ -24,7 +29,7 @@ namespace AICommand
 
         public static string InvokeChat(string prompt)
         {
-            var settings = AICommandSettings.instance;
+            var settings = AISettings.instance;
 
             // // POST
             // using var post = UnityWebRequest.Post(OpenAI.Api.Url, CreateChatRequestBody(prompt), "application/json");
@@ -32,7 +37,6 @@ namespace AICommand
             // post.timeout = settings.timeout;
             // // API key authorization
             // post.SetRequestHeader("Authorization", "Bearer " + settings.apiKey);
-
 
             //another post way
             var post = new UnityWebRequest(OpenAI.Api.Url, "POST");
@@ -61,12 +65,13 @@ namespace AICommand
 
             EditorUtility.ClearProgressBar();
 
-            if (post.isHttpError || post.isNetworkError)
+            if (post.isHttpError || post.result == UnityWebRequest.Result.ConnectionError)
             {
                 Debug.Log("isHttpError:"+post.isHttpError);
                 Debug.Log("isNetworkError:"+post.isNetworkError);
                 Debug.Log(post.error);
             }
+            // Debug.Log("post.result:"+post.result);
             Debug.Log(post.downloadHandler.text);
 
             // Response extraction
@@ -77,4 +82,4 @@ namespace AICommand
         }
     }
 
-} // namespace AICommand
+} // namespace OpenAI

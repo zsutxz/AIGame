@@ -1,0 +1,1 @@
+Create an unlit shader for Unity. Simple solid fill shader. The color is exposed as a property. Don't include any note nor explanation in the response. I only need the code body.

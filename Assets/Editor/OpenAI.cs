@@ -1,4 +1,4 @@
-namespace AICommand.OpenAI
+namespace OpenAI
 {
     public static class Api
     {

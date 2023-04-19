@@ -1,0 +1,8 @@
+Write a Unity Editor script.
+- It provides its functionality as a menu item placed "AI" > "Do Task".
+- It doesn’t provide any editor window. It immediately does the task when the menu item is invoked
+- Don’t use GameObject.FindGameObjectsWithTag.
+- There is no selected object. Find game objects manually.
+- I only need the script body. Don’t add any explanation.
+- The task is described as follows:
+- Create 100 cubes at random points.
